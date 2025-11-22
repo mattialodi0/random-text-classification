@@ -13,7 +13,8 @@ from argparse import ArgumentParser
 
 def random_uniform(n):
     """Uniform random characters."""
-    chars = string.ascii_letters + string.digits + string.punctuation + " "
+    # chars = string.ascii_letters + string.digits + string.punctuation + " "
+    chars = string.ascii_lowercase + "   "
     return ''.join(random.choice(chars) for _ in range(n))
 
 
@@ -31,8 +32,8 @@ def permuted(text):
 
 def random_markov_like(n):
     """Produce pseudo-word sequences that look a bit structured but are gibberish."""
-    consonants = "bcdfghjklmnpqrstvwxyz "
-    vowels = "aeiou "
+    consonants = "bcdfghjklmnpqrstvwxyz  "
+    vowels = "aeiou  "
     s = ""
     for _ in range(n):
         pattern = random.choice([
@@ -96,6 +97,11 @@ def generate_dataset(
         if _ % 500 == 0:
             print(f"[INFO] Generated {_ * 2} samples...")
 
+#     print(random_samples)
+# with open('datasets/wikipedia_clean_corpus.txt', "r", encoding="utf-8") as f:
+#     real_lines = [line.strip().lower() for line in f if len(line.strip()) > 3]
+# generate_dataset(real_lines=real_lines, total_samples=10, split=0, max_len=128, format="csv")
+
     real_samples_train, real_samples_val = real_samples[:int(len(real_samples)*(1-split))], real_samples[int(len(real_samples)*(1-split)):]
     random_samples_train, random_samples_val = random_samples[:int(len(random_samples)*(1-split))], random_samples[int(len(random_samples)*(1-split)):]
     train_dataset = real_samples_train + random_samples_train
@@ -104,8 +110,8 @@ def generate_dataset(
     # -------------------------------
     # Save dataset
     # -------------------------------
-    train_path = "train_dataset_128"
-    val_path = "val_dataset_128"
+    train_path = "train_dataset_"+max_len.__str__()
+    val_path = "val_dataset_"+max_len.__str__()
     if format == "csv":
         with open(train_path+".csv", "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f, quoting=csv.QUOTE_ALL)
