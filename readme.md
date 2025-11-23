@@ -5,8 +5,12 @@ The goal of this project is to develop a simple and fast LM to dect fake vs real
 ## Ngram Model
 The simplest possible model, not particularly effective
 
-| model | epochs | lr | acc | prec | rec | F1 | auc | adv@10 | adv@60 | adv@110 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| model | top_k | acc | prec | rec | F1 | auc | adv100@10 | adv@10060 | adv100@110 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2-gram | 150 | 0.9900 | 0.9823 | 0.9980 | 0.9901 | / | 1 | 1 | 1 |
+| 3-gram | 150 | 0.9570 | 0.9224 | 0.9980 | 0.9587 | / | 0.9 | 0.99 | 1 |
+| 4-gram | 150 | 0.9620 | 0.9342 | 0.9940 | 0.9632 | / | 0.4 | 0.71 | 0.72 |
+| 5-gram | 150 | 0.976 | 0.983 | 0.968 | 0.975 | / | 0.08 | 0.16 | 0.2 |
 
 ## 1d CNN
 A simple model composed of an embedding layer, 3 1d CNN layers, a dropout layer and a linear layer.
@@ -25,7 +29,7 @@ Here the focus is on the training, to make the model generalize better.
 ### boosted training
 | model | epochs | lr | acc | prec | rec | F1 | auc | adv@10 | adv@60 | adv@110 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 3 layers, 128 filters | 5 | 1e-3 | 1 | 1 | 1 | 1 |  NaN | 1 | 0.5 | 1 |
+| 3 layers, 128 filters | 5 | 1e-3 | 1 | 1 | 1 | 1 |  NaN | 1 | 0.5 | 0.1 |
 
 
 ## Transformer
